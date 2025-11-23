@@ -1,0 +1,189 @@
+@import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&display=swap");
+
+:root {
+  --bg: #0d1117;
+  --fg: #f1f5f9;
+  --accent: #f59e0b;
+  --card-bg: rgba(255, 255, 255, 0.04);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --muted: #cbd5f5;
+  font-family: "Tajawal", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: radial-gradient(circle at top, rgba(245, 158, 11, 0.08), transparent 55%),
+    var(--bg);
+  color: var(--fg);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 4rem 1.5rem;
+}
+
+.page {
+  width: min(960px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  animation: fadeIn 0.8s ease both;
+}
+
+.hero {
+  text-align: center;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.tagline {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--muted);
+}
+
+.duration {
+  color: var(--muted);
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.card {
+  position: relative;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 1.25rem;
+  padding: 1.75rem;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 24px 38px -24px rgba(0, 0, 0, 0.7);
+  transition: transform 0.6s ease, border-color 0.6s ease;
+  overflow: hidden;
+}
+
+.card::before {
+  content: attr(data-index);
+  position: absolute;
+  top: 1rem;
+  inset-inline-start: 1.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.18), rgba(245, 158, 11, 0.45));
+  color: var(--fg);
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25);
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.25), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(245, 158, 11, 0.35);
+}
+
+.card:hover::after {
+  opacity: 1;
+}
+
+.card h2 {
+  font-size: 1.6rem;
+  margin-inline-end: 0;
+  margin-block-end: 0.75rem;
+}
+
+.time {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline-start: auto;
+  margin-block-end: 0.75rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(245, 158, 11, 0.16);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  margin-block: 0.85rem 1.25rem;
+}
+
+dl {
+  display: grid;
+  gap: 1.2rem;
+  font-size: 1.05rem;
+}
+
+dl div {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.dt,
+ dt {
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.01em;
+}
+
+dd {
+  line-height: 1.7;
+}
+
+.footer {
+  padding: 1.5rem;
+  border: 1px solid var(--card-border);
+  border-radius: 1.1rem;
+  background: rgba(15, 23, 42, 0.75);
+  text-align: center;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 1.05rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 720px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid article:last-child {
+    grid-column: span 2;
+  }
+}
